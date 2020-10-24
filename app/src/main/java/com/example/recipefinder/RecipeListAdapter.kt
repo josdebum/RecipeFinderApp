@@ -17,10 +17,16 @@ class RecipeListAdapter (private val list: ArrayList<Recipe>,
 ): RecyclerView.Adapter<RecipeListAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        if (holder != null) {
-            holder.bindView(list[position])
-        }
+        holder.bindView(list[position])
     }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(context)
+            .inflate(R.layout.list_row, parent, false)
+
+        return ViewHolder(view)
+    }
+
 
 
     override fun getItemCount(): Int {
@@ -66,12 +72,6 @@ class RecipeListAdapter (private val list: ArrayList<Recipe>,
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context)
-            .inflate(R.layout.list_row, parent, false)
-
-        return ViewHolder(view)
-    }
 
 
 }

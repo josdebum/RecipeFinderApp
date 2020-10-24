@@ -1,21 +1,28 @@
 package com.example.recipefinder
 
-import android.app.DownloadManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_recipe_list.*
 import org.json.JSONException
 import org.json.JSONObject
 
 class RecipeList : AppCompatActivity() {
+
+    var urlString = "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3"
+
+    var url: String? = null
+
+
 
     var volleyRequest: RequestQueue? = null
     var recipeList: ArrayList<Recipe>? = null
@@ -25,39 +32,50 @@ class RecipeList : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_list)
+
+        var extras = intent.extras
+        var ingredients = extras?.get("ingredients")
+        var searchTerm = extras?.get("search")
+
+        if (extras != null && !ingredients?.equals("")!!
+            && !searchTerm?.equals("")!!
+        )
+        {
+            //construct our url
+            var tempUrl = LEFT_LINK + ingredients + QUERY + searchTerm
+            url = tempUrl
+
+        }
+
+        else
+        {
+
+            url = "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3"
+
+        }
+
+        recipeList = ArrayList()
+
+        volleyRequest = Volley.newRequestQueue(this)
+
+
+        getRecipe(url!!)
+
     }
 
-    var urlString = "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3"
 
-    var url: String? = null
 
-    var extras = intent.extras
-    var ingredients = extras?.get("ingredients")
-    var searchTerm = extras?.get("search")
 
-    if (extras != null && !ingredients.equals("")
-    && !searchTerm.equals(""))
-    {
-        //construct our url
-        var tempUrl = LEFT_LINK + ingredients + QUERY + searchTerm
-        url = tempUrl
 
-    }
-
-    else
-    {
-
-        url = "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3"
-
-    }
 
 
     fun getRecipe(url: String) {
-        val recipeRequest = JsonObjectRequest(
-            DownloadManager.Request.
 
-            ,
-            url,
+
+        val recipeRequest = JsonObjectRequest(
+            Request.Method.GET,
+            url, null,
+
             Response.Listener { response: JSONObject ->
                 try {
 
@@ -87,8 +105,8 @@ class RecipeList : AppCompatActivity() {
                         layoutManager = LinearLayoutManager(this)
 
                         //setup list/recyclerview
-                        recyclerView.layoutManager = layoutManager
-                        recyclerView.adapter = recipeAdapter
+                        recyclerViewId.layoutManager = layoutManager
+                        recyclerViewId.adapter = recipeAdapter
 
 
                     }
