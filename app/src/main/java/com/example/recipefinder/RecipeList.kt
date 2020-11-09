@@ -43,14 +43,14 @@ class RecipeList : AppCompatActivity() {
         {
             //construct our url
             var tempUrl = LEFT_LINK + ingredients + QUERY + searchTerm
-            url = tempUrl
+            urlString = tempUrl
 
         }
 
         else
         {
 
-            url = "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3"
+            urlString
 
         }
 
@@ -59,7 +59,7 @@ class RecipeList : AppCompatActivity() {
         volleyRequest = Volley.newRequestQueue(this)
 
 
-        getRecipe(url!!)
+        getRecipe(urlString)
 
     }
 
@@ -132,5 +132,7 @@ class RecipeList : AppCompatActivity() {
 
 
         volleyRequest!!.add(recipeRequest)
+
+        return
     }
 }

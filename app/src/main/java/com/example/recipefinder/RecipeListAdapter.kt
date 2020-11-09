@@ -15,9 +15,16 @@ import com.squareup.picasso.Picasso
 class RecipeListAdapter (private val list: ArrayList<Recipe>,
                          private val context: Context
 ): RecyclerView.Adapter<RecipeListAdapter.ViewHolder>() {
+
+
+
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.bindView(list[position])
+
+        if (holder != null) {
+            holder.bindView(list[position])
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,6 +32,11 @@ class RecipeListAdapter (private val list: ArrayList<Recipe>,
             .inflate(R.layout.list_row, parent, false)
 
         return ViewHolder(view)
+
+
+
+
+
     }
 
 
