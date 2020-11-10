@@ -19,11 +19,6 @@ import org.json.JSONObject
 class RecipeList : AppCompatActivity() {
 
     var urlString = "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3"
-
-    var url: String? = null
-
-
-
     var volleyRequest: RequestQueue? = null
     var recipeList: ArrayList<Recipe>? = null
     var recipeAdapter: RecipeListAdapter? = null
@@ -39,49 +34,34 @@ class RecipeList : AppCompatActivity() {
 
         if (extras != null && !ingredients?.equals("")!!
             && !searchTerm?.equals("")!!
-        )
-        {
+        ) {
             //construct our url
             var tempUrl = LEFT_LINK + ingredients + QUERY + searchTerm
             urlString = tempUrl
 
-        }
-
-        else
-        {
+        } else {
 
             urlString
 
         }
 
         recipeList = ArrayList()
-
         volleyRequest = Volley.newRequestQueue(this)
 
-
         getRecipe(urlString)
-
     }
 
 
-
-
-
-
-
-    fun getRecipe(url: String) {
-
-
+    private fun getRecipe(url: String) {
         val recipeRequest = JsonObjectRequest(
             Request.Method.GET,
             url, null,
-
-            Response.Listener { response: JSONObject ->
+            { response: JSONObject ->
                 try {
 
                     val resultArray = response.getJSONArray("results")
 
-                    for (i in 0..resultArray.length() - 1) {
+                    for (i in 0 until resultArray.length()) {
                         var recipeObj = resultArray.getJSONObject(i)
 
 
@@ -96,7 +76,7 @@ class RecipeList : AppCompatActivity() {
                         recipe.title = title
                         recipe.link = link
                         recipe.thumbnail = thumbnail
-                        recipe.ingredients = "Ingredients: ${ingredients}"
+                        recipe.ingredients = "Ingredients: $ingredients"
 
 
                         recipeList!!.add(recipe)
@@ -107,8 +87,6 @@ class RecipeList : AppCompatActivity() {
                         //setup list/recyclerview
                         recyclerViewId.layoutManager = layoutManager
                         recyclerViewId.adapter = recipeAdapter
-
-
                     }
 
                     recipeAdapter!!.notifyDataSetChanged()
@@ -119,7 +97,7 @@ class RecipeList : AppCompatActivity() {
                 }
 
             },
-            Response.ErrorListener { error: VolleyError? ->
+            { error: VolleyError? ->
                 try {
                     Log.d("Error:", error.toString())
 
@@ -130,9 +108,6 @@ class RecipeList : AppCompatActivity() {
 
         )
 
-
         volleyRequest!!.add(recipeRequest)
-
-        return
     }
 }

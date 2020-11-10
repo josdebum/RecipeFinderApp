@@ -15,16 +15,8 @@ import com.squareup.picasso.Picasso
 class RecipeListAdapter (private val list: ArrayList<Recipe>,
                          private val context: Context
 ): RecyclerView.Adapter<RecipeListAdapter.ViewHolder>() {
-
-
-
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-
-        if (holder != null) {
-            holder.bindView(list[position])
-        }
+        holder?.bindView(list[position])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,11 +24,6 @@ class RecipeListAdapter (private val list: ArrayList<Recipe>,
             .inflate(R.layout.list_row, parent, false)
 
         return ViewHolder(view)
-
-
-
-
-
     }
 
 
@@ -49,17 +36,14 @@ class RecipeListAdapter (private val list: ArrayList<Recipe>,
 
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        var title = itemView.findViewById<TextView>(R.id.recipeTitle)
-        var thumbnail = itemView.findViewById<ImageView>(R.id.thumbnail)
-        var ingredients = itemView.findViewById<TextView>(R.id.recipeIngredients)
-        var linkButton = itemView.findViewById<Button>(R.id.linkButton)
-
+        var title: TextView = itemView.findViewById(R.id.recipeTitle)
+        var thumbnail: ImageView = itemView.findViewById(R.id.thumbnail)
+        var ingredients: TextView = itemView.findViewById(R.id.recipeIngredients)
+        var linkButton: Button = itemView.findViewById(R.id.linkButton)
 
         fun bindView(recipe: Recipe) {
             title.text = recipe.title
             ingredients.text = recipe.ingredients
-
-
 
             if (!TextUtils.isEmpty(recipe.thumbnail)) {
                 Picasso.get()
