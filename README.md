@@ -40,12 +40,14 @@ Its a Networking App which uses Google's Volley Networking Library!!
      <td>Recipes </td>
      <td>Each Recipe</td>
   </tr>
+  
   <tr>
     <td><img src="https://user-images.githubusercontent.com/37649534/100356526-a2cf8700-2ff3-11eb-9b5b-0a7642adbf6b.jpg" width ="250" height ="500"></td>
     <td><img src="https://user-images.githubusercontent.com/37649534/100356431-84698b80-2ff3-11eb-8fba-68b838c365a2.jpg" width ="250" height ="500"></td> 
    <td><img src="https://user-images.githubusercontent.com/37649534/100356567-b1b63980-2ff3-11eb-8856-3b5344c65aea.jpg" width ="250" height ="500"></td>
   </tr>
-
-
-<img src="https://user-images.githubusercontent.com/37649534/100356624-c397dc80-2ff3-11eb-83d8-68df487f6b61.jpg" width ="250" height ="500">
-
+  
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/37649534/100356624-c397dc80-2ff3-11eb-83d8-68df487f6b61.jpg" width ="250" height ="500"></td>
+  </tr>
+  
