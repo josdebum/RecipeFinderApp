@@ -48,6 +48,3 @@ Its a Networking App which uses Google's Volley Networking Library!!
 
 
 
-<img src="https://user-images.githubusercontent.com/37649534/100356624-c397dc80-2ff3-11eb-83d8-68df487f6b61.jpg" width ="250" height ="500">
-
-
